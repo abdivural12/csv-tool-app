@@ -1,0 +1,12 @@
+streamlit
+langchain
+langchain-experimental
+langchain-openai
+python-dotenv
+langchain-community
+pandas
+matplotlib
+scikit-learn
+tslearn
+prophet
+
