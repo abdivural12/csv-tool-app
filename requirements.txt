@@ -9,4 +9,5 @@ matplotlib
 scikit-learn
 tslearn
 prophet
+tabulate
 
