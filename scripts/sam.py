@@ -11,6 +11,7 @@ from langchain_experimental.agents.agent_toolkits import create_csv_agent
 from langchain_openai import ChatOpenAI, OpenAI
 from langchain.tools import tool
 import streamlit as st
+from dotenv import load_dotenv
 
 # Configuration du logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -167,6 +168,12 @@ def predict_future_temperatures(file_path: str, periods: int = 12) -> pd.DataFra
 def main():
     st.title("Time Series Analysis Application")
     
+    # Charger les secrets de Streamlit
+    load_dotenv()
+
+    # Récupérer la clé API depuis les secrets Streamlit
+    api_key = st.secrets["OPEN_API_KEY"]
+    
     # Remplacer par le chemin réel de votre fichier CSV
     file_path = "data/meteo_idaweb.csv"
     
@@ -177,7 +184,7 @@ def main():
 
     # Créer et configurer l'agent CSV avec les outils
     csv_agent = create_csv_agent(
-        OpenAI(temperature=0),
+        OpenAI(api_key=api_key, temperature=0),
         file_path,
         verbose=True,
         agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
